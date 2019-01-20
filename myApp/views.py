@@ -114,7 +114,7 @@ def checkDetail(request):
 
 def detail(request, id):
     rwms = Rwm.objects.all()
-    rwm = rwms[int(id-1)]
+    rwm = rwms[int(id)-1]
     data = {
         'rwm': rwm,
     }
@@ -141,7 +141,7 @@ def addCart(request):
         carts = Cart.objects.filter(user=user).filter(goods=goods)
         if carts.exists():
             print('添加失败')
-            return JsonResponse({'msg': '添加失败,您购物车中已有该商品', 'status': 0})
+            return JsonResponse({'msg': '添加失败,您购物车中已有同类型商品', 'status': 0})
         else:
             cart = Cart()
             cart.user = user
