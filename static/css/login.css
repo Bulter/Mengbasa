@@ -6,10 +6,6 @@ a{color: #797979;font-size: 12px;text-decoration: none;}
 .user_info_l{float: left;height: auto;width: 505px;}
 .user_info_l img{margin: 23px 18px 20px 84px;}
 .user_info_r{float: left;height: auto;width: 400px;text-align: left;padding-top: 16px;overflow: hidden;}
-.user_info_r .login_method .method_txt{cursor: pointer; color: #9f9f9f;display: inline-block;font-size: 14px;padding-bottom: 15px;position: relative;text-align: center;width: 49%;}
-.user_info_r .login_method .method_txt_1{background: black;display: inline-block;height: 2px;position: absolute;top:36px;left:71px;width: 55px;}
-.user_info_r .login_method .method_txt_2{background: black;display: inline-block;height: 2px;position: absolute;top:36px;left:62px;width: 72px;display: none;}
-.user_info_r .login_method .method_txton{color: #000;}
 .user_info_r .login_style{border: 1px solid #dcdcdc;height: auto;padding: 27px 0 0 34px;width: 364px;}
 .user_info_r .login_style form{width: 364px;}
 .login_style_txt1,.login_style_txt2,.login_style_txt3,.login_style_txt4,.login_style_txt5,.login_style_txt6,.login_style_txt7{height: 65px;overflow: hidden;position: relative;width: 364px;}

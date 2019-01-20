@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'Mengbasa.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Mengbasa',
+        'NAME': 'mengbasa',
         'USER': 'root',
         'PASSWORD': 'rock1204',
     }

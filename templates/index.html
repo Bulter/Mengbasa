@@ -6,31 +6,31 @@
     <meta name="description" content="梦芭莎官网首页"/>
     <meta name="keywords" content="梦芭莎官网"/>
     <title>【梦芭莎官网】梦芭莎女性购物网站女装、内衣、文胸、鞋包_网购衣服商城</title>
-    <link rel="icon" href="{% static 'img/aaaaaa.jpg' %}" type="image/x-icon"/>
     <link rel="shortcut icon" href="{% static 'img/aaaaaa.jpg' %}" type="image/x-icon"/>
+    <link rel="icon" href="{% static 'img/aaaaaa.jpg' %}" type="image/x-icon"/>
     <link rel="stylesheet" href="{% static 'css/indexstyle.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/indexmiddle.css' %}"/>
-    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'css/swiper.min.css' %}"/>
+    <script src="{% static 'js/jquery-3.3.1.js' %}"></script>
+    <script src="{% static 'js/swiper.jquery.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'js/top_bot.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/content.js' %}"></script>
-    <script type="text/javascript" src="{% static 'js/side.js' %}"></script>
     <script src="{% static 'js/jquery.cookie.js' %}"></script>
 </head>
 <body>
 
-<div class="out">
-    <div class="in" style="left: 925.5px; top: 267px;"><img src="{% static 'img/out.png' %}">
-        <div class="xx"><a href=""><img src="{% static 'img/shutdown01.png' %}"></a></div>
-    </div>
-</div>
 <!--顶部开始-->
 <div class="headerbox">
     <!--顶部菜单栏-->
     <div class="header">
         <div class="header_top">
             <div class="top_in">
-                <a href="" class="startlogin" target="_blank">登录</a><span>|</span>
-                <a href="register.html" target="_blank">注册</a><span>|</span>
+                {% if user %}
+                    <a href="" class="startlogin">{{ user.email }}</a><span>|</span>
+                    <a href="{% url 'myApp:logout' %}" class="startlogin">退出</a><span>|</span>
+                {% else %}
+                    <a href="{% url 'myApp:login' %}" class="startlogin" target="_blank">登录</a><span>|</span>
+                    <a href="{% url 'myApp:register' %}" target="_blank">注册</a><span>|</span>
+                {% endif %}
                 <a href="#">微信
                     <div class="phoneCode"><img src="{% static 'img/0826143248.jpg' %}" alt=""></div>
                 </a><span>|</span>
@@ -42,7 +42,7 @@
                 </a><span>|</span>
                 <a href="#">收藏梦芭莎</a><span>|</span>
                 <a href="#">English</a><span>|</span>
-                <a href="#"><span style="color: #666;">购物车</span>&nbsp;<img src="{% static 'img/0826151452.jpg' %}"
+                <a href="{% url 'myApp:cart' %}"><span style="color: #666;">购物车</span>&nbsp;<img src="{% static 'img/0826151452.jpg' %}"
                                                                             alt=""></a>
                 <div style="display:none;">购物车html</div>
             </div>
@@ -83,25 +83,25 @@
     <div class="nav">
         <div class="nav_in">
             <ul>
-                <li><a href=""><img src="{% static 'img/160826165214_01.jpg' %}" hsrc="img/nav 1.jpg" psrc=""
+                <li><a href=""><img src="{% static 'img/160826165214_01.jpg' %}" psrc=""
                                     alt=""></a></li>
-                <li><a href=""><img src="{% static 'img/160826165214_02.jpg' %}" hsrc="img/nav_02.jpg" psrc=""
+                <li><a href=""><img src="{% static 'img/160826165214_02.jpg' %}" psrc=""
                                     alt=""></a></li>
-                <li><a href=""><img src="{% static 'img/160826165214_03.jpg' %}" hsrc="img/nav_03.jpg" psrc=""
+                <li><a href=""><img src="{% static 'img/160826165214_03.jpg' %}" psrc=""
                                     alt=""></a></li>
-                <li><a href=""><img src="{% static 'img/160901093600.jpg' %}" hsrc="img/nav_04.jpg" psrc="" alt=""></a>
-                </li>
-                <li><a href=""><img src="{% static 'img/160826165214_05.jpg' %}" hsrc="img/nav_05.jpg" psrc=""
+                <li><a href=""><img src="{% static 'img/160901093600.jpg' %}" psrc=""
                                     alt=""></a></li>
-                <li><a href=""><img src="{% static 'img/160826165214_06.jpg' %}" hsrc="img/nav_06.jpg" psrc=""
+                <li><a href=""><img src="{% static 'img/160826165214_05.jpg' %}" psrc=""
                                     alt=""></a></li>
-                <li><a href=""><img src="{% static 'img/160826165214_07.jpg' %}" hsrc="img/nav_07.jpg" psrc=""
+                <li><a href=""><img src="{% static 'img/160826165214_06.jpg' %}" psrc=""
                                     alt=""></a></li>
-                <li><a href=""><img src="{% static 'img/160826165214_08.jpg' %}" hsrc="img/nav_08.jpg" psrc=""
+                <li><a href=""><img src="{% static 'img/160826165214_07.jpg' %}" psrc=""
                                     alt=""></a></li>
-                <li><a href=""><img src="{% static 'img/160826165214_09.jpg' %}" hsrc="img/nav_09.jpg" psrc=""
+                <li><a href=""><img src="{% static 'img/160826165214_08.jpg' %}" psrc=""
                                     alt=""></a></li>
-                <li><a href=""><img src="{% static 'img/160826165214_10.jpg' %}" hsrc="img/nav_10.jpg" psrc=""
+                <li><a href=""><img src="{% static 'img/160826165214_09.jpg' %}" psrc=""
+                                    alt=""></a></li>
+                <li><a href=""><img src="{% static 'img/160826165214_10.jpg' %}" psrc=""
                                     alt=""></a></li>
             </ul>
         </div>
@@ -424,19 +424,21 @@
 
 <!--Banner开始-->
 <div class="bannerbox">
-    <div class="banner">
+    <div class="swiper-container" id="topSwiper">
+        <div class="swiper-wrapper">
+            {% for img in imgs %}
+                <div class="swiper-slide">
+                    <a href="{% url 'myApp:detail' img.id %}">
+                        <img class="loopimg" src="{% static img.img1 %}" alt="">
+                        <img class="loopimg" src="{% static img.img2 %}" alt="">
+                        <img class="loopimg" src="{% static img.img3 %}" alt="">
+                        <img class="loopimg" src="{% static img.img4 %}" alt="">
+                    </a>
 
-    </div>
-    <div class="banner_point">
-        <ul class="bar">
-            <li class="active"></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-            <li></li>
-        </ul>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="swiper-pagination"></div>
     </div>
 </div>
 
@@ -962,7 +964,6 @@
                 </div>
             </li>
             <li class="sixli">
-                <img class="sixli_oneimg" src="{% static 'undefined' %}">
                 <div id="sanjiao"></div>
                 <div class="sixli_sever right_lis">
                     <div class="sixli_severin">联系客服</div>
@@ -1089,57 +1090,6 @@
         </div>
     </div>
     <!--底部滚动条-->
-    <div class="footer_scroll">
-        <div class="friend_link">友情链接：</div>
-        <div class="friendlinks_slide">
-            <ul class="scroll_box">
-                <li>
-                    <a href="" target="_blank">服饰百科</a>
-                    <a href="" target="_blank">服饰搭配</a>
-                </li>
-                <li>
-                    <a href="" target="_blank">梦芭莎内衣</a>
-                    <a href="" target="_blank">梦芭莎时尚女装</a>
-                    <a href="" target="_blank">梦芭莎优雅女装</a>
-                    <a href="" target="_blank">梦芭莎名鞋馆</a>
-                    <a href="" target="_blank">梦芭莎饰品馆</a>
-                    <a href="" target="_blank">梦芭莎包包馆</a>
-                    <a href="" target="_blank">梦芭莎怎么样</a>
-                    <a target="_blank" href="">旅游攻略</a>
-                </li>
-                <li>
-                    <a target="_blank" href="">亿邦动力网</a>
-                    <a target="_blank" href="">名鞋库</a>
-                    <a target="_blank" href="">杂志</a>
-                    <a target="_blank" href="">淘金地</a>
-                    <a target="_blank" href="">折纸</a>
-                    <a target="_blank" href="">家具</a>
-                    <a target="_blank" href="">钻石小鸟</a>
-                    <a target="_blank" href="">分类信息</a>
-                    <a target="_blank" href="">拍鞋网</a>
-                </li>
-                <li>
-                    <a target="_blank" href="">侠侣好玩</a>
-                    <a target="_blank" href="">折800</a>
-                    <a target="_blank" href="">建材产品 </a>
-                    <a target="_blank" href="">女装搭配网</a>
-                    <a target="_blank" href="">悦美网</a>
-                    <a target="_blank" href="">嗨淘化妆品</a>
-                    <a target="_blank" href="">装修网</a>
-                    <a target="_blank" href="">光波网</a>
-                    <a target="_blank" href="">比价网</a>
-                    <a target="_blank" href="">中国丽人网</a>
-                    <a target="_blank" href="">电子商务</a>
-                    <a target="_blank" href="">狗民网</a>
-                </li>
-                <li>
-                    <a target="_blank" href="">志趣网</a>
-                    <a target="_blank" href="">欣欣百宝箱</a>
-                    <a target="_blank" href="">加盟</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 </div>
 
 

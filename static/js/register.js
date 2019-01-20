@@ -35,15 +35,25 @@ $(function(){
 	//邮箱验证
 	var isTure1;
 	var isTure2;
-	$('.txt1_in').focus().blur(function(){
+	$('.txt1_in').blur(function(){
 		var reg1 = /^[a-zA-Z0-9_\.\-]+@[a-zA-Z0-9_\.\-]+\.[a-zA-Z]+$/;
 	    var str_email = $('.txt1_in').val();
 	    isTure1 = reg1.test(str_email);
+	    if (isTure1){
+			$.get('/checkEP/', {'email': $(this).val()}, function (response) {
+				if(!response.status){
+					alert(response.msg);
+					isTure1 = false;
+				}
+			});
+		}
+
 	    if(!str_email){
 	    	$('.true_rlable1').hide().siblings('.flase_rlable1').hide();
 	    	$(this).css('border','1px solid #C9C9C9');
 	    }else{
 	    	if(isTure1){
+
 	    	    $('.true_rlable1').show().siblings('.flase_rlable1').hide();
 	    	    $(this).css('border','1px solid #C9C9C9');
 	        }else{
@@ -69,8 +79,8 @@ $(function(){
 	                $(this).css('border','1px solid #e50065');
 	        	}
 	        }
-	    })
-	}) 
+	    });
+	});
 	
 	//验证密码
 	var isTure3;
@@ -112,7 +122,7 @@ $(function(){
 	    		$('.flase_rlable333').css('backgroundPosition','0 -42px');
 	    	}
 	    }
-	})	
+	});
 	
 	//确认密码
 	var str_confirmpwd;
@@ -133,45 +143,12 @@ $(function(){
 	            $(this).css('border','1px solid #e50065');
 	        }
 	    }
-	})	
-	
+	});
 
-    		
-	//如果已经存在该用户, 不能注册
-	//不存在则注册, 保存到cookie	
-	$("input.txt6_in").click(function(){							
-		//注册(cookie存储)
-		var users = $.cookie("users") ? JSON.parse($.cookie("users")) : [];
-		//先判断是否存在该用户
-		for (var i=0; i<users.length; i++) {
-			if ( users[i].name == $('.txt1_in').val()|| users[i].name == $('.txt2_in').val()) {
-				console.log( $.cookie("users") );
-				alert("用户名已存在! 不能注册相同的用户");
-				return;
-			}else if(users[i].name != $('.txt1_in').val()|| users[i].name != $('.txt2_in').val()){
-				if(confirm("注册成功，点击确定回到登录页面")){
-					window.location.href="login.html";
-				}else{
-					window.close();
-				}
-			}
-		}
-		
-		if($('input.txt7_in').is(':checked') && str_pwd==str_confirmpwd && isTure3 && (isTure2 || isTure1||(isTure1 && isTure2)) && str_postcode==rtestPwd.val()){
-			//注册用户
-		    var user = {
-		    	name: $('.txt1_in').val(),
-		    	pwd: $('.txt3_in').val()
-		    }
-		    var user1 = {
-		    	name: $('.txt2_in').val(),
-		    	pwd: $('.txt3_in').val()
-		    }
-		    users.push(user); 	
-		    users.push(user1); 
-		    $.cookie("users", JSON.stringify(users), {expires:22, path:"/"});
-//		    console.log( $.cookie("users") );
+
+	$(".txt6_in").click(function(){
+		if($('.txt7_in').is(':checked') && str_pwd==str_confirmpwd && isTure3 && (isTure2 || isTure1) && str_postcode==rtestPwd.val()){
+			$('.register_stylebox').submit();
 		}
 	})
-
-})
+});

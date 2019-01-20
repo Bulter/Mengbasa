@@ -41,13 +41,12 @@ a{cursor: pointer;}
 .slionav_left .lihover ul{display: block;}
 
 /*Banner部分*/
-.bannerbox{width: 100%;height: auto;margin: auto;position: relative;}
-/*.banner_bg{background-position: center top;}*/
-.banner{height: 1200px;height: 672px;overflow: hidden;}
-.bg_in{width:1200px;margin:0 auto;cursor: pointer;}
-.banner_point .bar{z-index: 99;width: 200px;height: 16px;position: absolute;top: 640px;right:300px;overflow: hidden;cursor: pointer;}
-.bar li{width: 15px;height: 15px;border-radius: 50%;background: black;float: left;margin-left: 10px;}
-.bar .active{background: white;}
+.swiper-slide{
+    overflow: auto;
+}
+.loopimg{
+    float: left;
+}
 
 /*主体部分开始*/
 /*热门*/
